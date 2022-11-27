@@ -36,7 +36,7 @@ jobs:
           cp build/release/upx /usr/local/bin/upx
       - name: Upx compress binary
         run: |
-          cd /github/workspace/dist
+          cd ./dist
           ls -lt
           tar -xvzf webdavfs-linux-mips.tar.gz -C .
           upx webdavfs
