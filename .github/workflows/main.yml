@@ -36,7 +36,9 @@ jobs:
           cp build/release/upx /usr/local/bin/upx
       - name: Upx compress binary
         run: |
-          cd ./dist
+          mkdir ./dist_upx
+          cp ./dist/* ./dist_upx/
+          cd ./dist_upx
           ls -lt
           tar -xvzf webdavfs-linux-mips.tar.gz -C .
           upx webdavfs
@@ -49,4 +51,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: "./dist/*.tar.gz"
+          args: "./dist_upx/*.tar.gz"
