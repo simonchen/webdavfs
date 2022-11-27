@@ -23,6 +23,26 @@ jobs:
             name: 'webdavfs'
             compress: 'true'
             dest: 'dist'
+      - name: Install upx
+        working-directory: /tmp
+        env:
+          CC: clang
+          CXX: clang++
+        run: |
+          set -ex
+          git clone --recursive https://github.com/upx/upx.git
+          cd upx
+          make
+          cp build/release/upx /usr/local/bin/upx
+      - name: Upx compress binary
+        run: |
+          cd ./dist
+          tar -xvzf webdavfs-linux-mips.tar.gz -C .
+          upx webdavfs
+          tar -cvzf webdavfs-linux-mips.tar.gz webdavfs README.md
+          tar -xvzf webdavfs-linux-mipsel.tar.gz -C .
+          upx webdavfs
+          tar -cvzf webdavfs-linux-mipsle.tar.gz webdavfs README.md
       - name: Upload build-artifacts
         uses: skx/github-action-publish-binaries@master
         env:
