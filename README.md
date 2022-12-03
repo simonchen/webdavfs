@@ -149,10 +149,9 @@ Using it is simple as:
 | nonempty		| As per fuse documentation |
 | maxconns              | Maximum number of parallel connections to the webdav
 |                       | server (default 8)
-| maxidleconns          | Maximum number of idle connections (default 8)
-
-NEW Options [2022-12-3]
-| readbuff  | 1024 (default) How many bytes fetched from webdav server
+| maxidleconns          | Maximum number of idle connections (default 8) |
+| ** NEW Options [2022-12-3] ** ||
+| readbuff  | 1024 (default) How many bytes fetched from webdav server |
 | usepagecache | false (default) use kernel cache for the open file
 
 If the webdavfs program is called via `mount -t webdavfs` or as `mount.webdav`,
