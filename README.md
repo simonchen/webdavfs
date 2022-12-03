@@ -30,6 +30,12 @@ to write to files.
 
 But if you only need to read files it's still way faster than davfs2 :)
 
+## Cross-compile
+Avoiding to call gcc compiler
+```
+go env -w CGO_ENABLED=0
+```
+
 ## What is working
 
 Basic filesystem operations.
