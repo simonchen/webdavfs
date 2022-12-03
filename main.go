@@ -159,6 +159,9 @@ func main() {
 	if mountOpts.MaxIdleConns == 0 {
 		mountOpts.MaxIdleConns = 8
 	}
+	if mountOpts.ReadBuff == 0 {
+		mountOpts.ReadBuff = 1024
+	}
 
 	if strings.HasPrefix(progname, "mount.") || opts.Daemonize {
 		if !IsDaemon() {
@@ -255,6 +258,8 @@ func main() {
 		Password: password,
 		Cookie: cookie,
 		PutDisabled: mountOpts.ReadWriteDirOps,
+		ReadBuff: mountOpts.ReadBuff,
+		UsePageCache: mountOpts.UsePageCache,
 	}
 	err = dav.Mount()
 	if err != nil {
