@@ -33,6 +33,7 @@ type DavClient struct {
 	MaxConns	int
 	MaxIdleConns	int
 	ReadBuff	int
+	UsePageCache	bool
 	base		string
 	cc		*http.Client
 	davSem		davSem
