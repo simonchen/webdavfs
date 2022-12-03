@@ -32,6 +32,7 @@ type DavClient struct {
 	PutDisabled	bool
 	MaxConns	int
 	MaxIdleConns	int
+	ReadBuff	int
 	base		string
 	cc		*http.Client
 	davSem		davSem
@@ -212,11 +213,11 @@ func getHeader(h http.Header, key string) string {
 	return strings.Join(h[key], ",")
 }
 
-func drainBody(resp *http.Response) {
+func (d *DavClient) drainBody(resp *http.Response) {
 	if resp == nil || resp.Body == nil {
 		return
 	}
-	b := make([]byte, 8192)
+	b := make([]byte, d.ReadBuff)
 	var err error
 	for err != io.EOF {
 		_, err = resp.Body.Read(b)
@@ -359,7 +360,7 @@ func (d *DavClient) Mount() (err error) {
 	}
 	req.Header.Set("Accept", "*/*")
 	resp, err := d.do(req)
-	defer drainBody(resp)
+	defer d.drainBody(resp)
 	if err != nil {
 		return
 	}
@@ -697,7 +698,7 @@ func (d *DavClient) Mkcol(path string) (err error) {
 		return
 	}
 	resp, err := d.do(req)
-	defer drainBody(resp)
+	defer d.drainBody(resp)
 	if err != nil {
 		return
 	}
@@ -723,7 +724,7 @@ func (d *DavClient) Delete(path string) (err error) {
 		return
 	}
 	resp, err := d.do(req)
-	defer drainBody(resp)
+	defer d.drainBody(resp)
 	if err != nil {
 		return
 	}
@@ -755,7 +756,7 @@ func (d *DavClient) Move(oldPath, newPath string) (err error) {
 	}
 	req.Header.Set("Destination", joinPath(d.Url, newPath))
 	resp, err := d.do(req)
-	defer drainBody(resp)
+	defer d.drainBody(resp)
 	if err != nil {
 		return
 	}
@@ -797,7 +798,7 @@ func (d *DavClient) apachePutRange(path string, data []byte, offset int64, creat
 	req.Header.Set("Content-Range", fmt.Sprintf("bytes %d-%d/*", offset, end))
 
 	resp, err := d.do(req)
-	defer drainBody(resp)
+	defer d.drainBody(resp)
 	if err != nil {
 		return
 	}
@@ -832,7 +833,7 @@ func (d *DavClient) sabrePutRange(path string, data []byte, offset int64, create
 	req.Header.Set("X-Update-Range", fmt.Sprintf("bytes=%d-", offset))
 
 	resp, err := d.do(req)
-	defer drainBody(resp)
+	defer d.drainBody(resp)
 	if err != nil {
 		return
 	}
