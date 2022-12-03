@@ -32,7 +32,7 @@ type DavClient struct {
 	PutDisabled	bool
 	MaxConns	int
 	MaxIdleConns	int
-	ReadBuff	int
+	ReadBuff	uint32
 	UsePageCache	bool
 	base		string
 	cc		*http.Client
