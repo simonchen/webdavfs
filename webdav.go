@@ -216,7 +216,7 @@ func drainBody(resp *http.Response) {
 	if resp == nil || resp.Body == nil {
 		return
 	}
-	b := make([]byte, 256)
+	b := make([]byte, 4096)
 	var err error
 	for err != io.EOF {
 		_, err = resp.Body.Read(b)
