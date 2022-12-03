@@ -780,7 +780,11 @@ func (nf *Node) Open(ctx context.Context, req *fuse.OpenRequest, resp *fuse.Open
 		nf.Dnode = dnode
 		nf.statInfoTouch()
 		if dnode.Size == nf.Size && dnode.Mtime == nf.Mtime {
-			resp.Flags = fuse.OpenKeepCache
+			if dav.UsePageCache {
+				resp.Flags = fuse.OpenKeepCache
+			} else {
+				resp.Flags = fuse.OpenDirectIO
+			}
 		}
 		nf.Unlock()
 
