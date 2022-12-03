@@ -151,6 +151,10 @@ Using it is simple as:
 |                       | server (default 8)
 | maxidleconns          | Maximum number of idle connections (default 8)
 
+NEW Options [2022-12-3]
+| readbuff  | 1024 (default) How many bytes fetched from webdav server
+| usepagecache | false (default) use kernel cache for the open file
+
 If the webdavfs program is called via `mount -t webdavfs` or as `mount.webdav`,
 it will fork, re-exec and run in the background. In that case it will remove
 the username and password options from the command line, and communicate them
