@@ -81,7 +81,7 @@ func NewFS(d *DavClient, config WebdavFS) *WebdavFS {
 	}
 	FS.dirMode |= os.ModeDir
 
-	FS.blockSize = 4096 * 10
+	FS.blockSize = 4096
 	if runtime.GOOS == "darwin" {
 		// if we set this on osxfuse, _all_ I/O will
 		// be limited to FS.blockSize bytes.
