@@ -344,11 +344,13 @@ func (d *DavClient) Mount() (err error) {
 		}
 		// Override some values from DefaultTransport.
 		tr := *(http.DefaultTransport.(*http.Transport))
+		tr.MaxIdleConns = d.MaxIdleConns
+                tr.MaxConnsPerHost = d.MaxIdleConns
 		tr.MaxIdleConnsPerHost = d.MaxIdleConns
 		tr.DisableCompression = true
 
 		d.cc = &http.Client{
-			Timeout: 60 * time.Second,
+			Timeout: 15 * time.Second,
 			Transport: &tr,
 			CheckRedirect: func(req *http.Request, via []*http.Request) error {
 				return errors.New("400 Will not follow redirect")
