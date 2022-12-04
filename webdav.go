@@ -7,6 +7,7 @@ import (
 	"errors"
 	"io"
 	"io/ioutil"
+	"bufio"
 	"net/http"
 	"net/url"
 	"runtime"
@@ -268,8 +269,9 @@ func (d *DavClient) buildRequest(method string, path string, b ...interface{}) (
 			blen = -1
 		}
 	}
+	reader := bufio.NewReaderSize(body, int(d.ReadBuff))
 	u := url.URL{ Path: path }
-	req, err = http.NewRequest(method, d.Url + u.EscapedPath(), body)
+	req, err = http.NewRequest(method, d.Url + u.EscapedPath(), reader)
 	if err != nil {
 		return
 	}
