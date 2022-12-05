@@ -1,5 +1,8 @@
 # webdavfs
 
+This is forked from [miquels/webdavfs](https://github.com/miquels/webdavfs)
+I've maded some improvements to add new options and better performance.
+
 ## A FUSE filesystem for WEBDAV shares.
 
 Most filesystem drivers for Webdav shares act somewhat like a mirror;
