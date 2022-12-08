@@ -9,8 +9,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
-	"github.com/simonchen/fuse"
-	"github.com/simonchen/fuse/fs"
+	"bazil.org/fuse"
+	"bazil.org/fuse/fs"
 )
 
 const (
