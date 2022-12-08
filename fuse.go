@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"golang.org/x/net/context"
-	"bazil.org/fuse"
-	"bazil.org/fuse/fs"
+	"github.com/simonchen/fuse"
+	"github.com/simonchen/fuse/fs"
 )
 
 const (
