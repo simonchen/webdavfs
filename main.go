@@ -6,8 +6,8 @@ import (
 	"os"
 	"path"
 	"strings"
-	"bazil.org/fuse"
-	"bazil.org/fuse/fs"
+	"github.com/simonchen/fuse"
+	"github.com/simonchen/use/fs"
 	"github.com/pborman/getopt/v2"
 )
 
