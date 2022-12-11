@@ -42,10 +42,10 @@ jobs:
           ls -lt
           tar -xvzf webdavfs-linux-mips.tar.gz -C .
           upx webdavfs
-          tar -cvzf webdavfs-linux-mips.tar.gz webdavfs README.md
+          tar -cvzf webdavfs-linux-mips.tar.gz webdavfs README.md -C .
           tar -xvzf webdavfs-linux-mipsle.tar.gz -C .
           upx webdavfs
-          tar -cvzf webdavfs-linux-mipsle.tar.gz webdavfs README.md
+          tar -cvzf webdavfs-linux-mipsle.tar.gz webdavfs README.md -C .
       - name: Upload build-artifacts
         uses: skx/github-action-publish-binaries@master
         env:
