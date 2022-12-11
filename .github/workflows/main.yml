@@ -18,7 +18,7 @@ jobs:
       - name: Generate build files
         uses: thatisuday/go-cross-build@v1
         with:
-            platforms: 'linux/mips, linux/mipsle'
+            platforms: 'linux/mips, linux/mipsle, linux/arm'
             package: ''
             name: 'webdavfs'
             compress: 'true'
@@ -46,6 +46,9 @@ jobs:
           tar -xvzf webdavfs-linux-mipsle.tar.gz -C .
           upx webdavfs
           tar -cvzf webdavfs-linux-mipsle.tar.gz webdavfs README.md
+          tar -xvzf webdavfs-linux-arm.tar.gz -C .
+          upx webdavfs
+          tar -cvzf webdavfs-linux-arm.tar.gz webdavfs README.md
       - name: Upload build-artifacts
         uses: skx/github-action-publish-binaries@master
         env:
